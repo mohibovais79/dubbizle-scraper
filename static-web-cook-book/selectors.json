@@ -1,0 +1,46 @@
+{
+    "pages": {
+        "root": "https://uae.dubizzle.com/",
+        "home": "/",
+        "about": "/about",
+        "contact": "/contact",
+        "login": "/login",
+        "dashboard": "/dashboard"
+    },
+    "selectors": {
+        "cssSelectors": {
+            "loginButton": ".btn-login",
+            "signUpButton": ".btn-signup",
+            "headerLogo": ".header-logo",
+            "footer": ".footer-section"
+        },
+        "xPaths": {
+            "usernameField": "//input[@name='username']",
+            "passwordField": "//input[@name='password']",
+            "submitButton": "//button[@type='submit']"
+        },
+        "ids": {
+            "searchBar": "search-input",
+            "menuButton": "menu-toggle"
+        },
+        "names": {
+            "emailInput": "email",
+            "passwordInput": "password"
+        },
+        "linkTexts": {
+            "forgotPasswordLink": "Forgot your password?",
+            "termsOfServiceLink": "Terms of Service"
+        },
+        "partialLinkTexts": {
+            "privacyPolicyLink": "Privacy Policy"
+        },
+        "tagNames": {
+            "allButtons": "button",
+            "allLinks": "a"
+        },
+        "classNames": {
+            "errorMessage": "error-message",
+            "successMessage": "success-message"
+        }
+    }
+}
