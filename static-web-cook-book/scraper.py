@@ -27,6 +27,21 @@ def get_page_content(page_key: str) -> str:
     return driver.page_source
 
 
+def search_listing(driver: webdriver):
+    try:
+        search_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='search']"))
+        )
+        search_button.click()
+        print("Clicked the search button.")
+
+        # Wait for a URL change or specific element on the new page
+        WebDriverWait(driver, 10).until(EC.url_changes(driver.current_url))
+        print("Navigation occurred.")
+    except Exception as e:
+        print("Navigation did not happen:", e)
+
+
 def scrape_page(page_key: str):
     property_links = []
     driver.get("https://uae.dubizzle.com/")
@@ -58,12 +73,9 @@ def scrape_page(page_key: str):
                 category_div = wait.until(EC.presence_of_element_located((By.XPATH, f"//div[h2[text()='{category}']]")))
                 print(f"Found the category div for: {category}")
 
-                category_div_html = category_div.get_attribute("outerHTML")
-                print("category_div HTML:", category_div_html)
-
                 view_all_link = driver.find_element(
                     By.XPATH,
-                    f"//a[contains(text(), 'All in') and contains(@href, '{category.lower().replace(' ', '-')}')]",
+                    f"//a[contains(text(), 'All in Property for ') and contains(@href, '{category.lower().replace(' ', '-')}')]",
                 )
                 href = view_all_link.get_attribute("href")
 
@@ -83,6 +95,7 @@ def scrape_page(page_key: str):
             wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
             # TODO: Add scraping logic here
+            search_listing(driver)
 
             driver.back()
 
